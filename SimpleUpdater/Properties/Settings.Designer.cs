@@ -25,15 +25,6 @@ namespace SimpleUpdater.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://rhoyne.cloudapp.net/NyxArcana")]
-        public string LauncherURL {
-            get {
-                return ((string)(this["LauncherURL"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://rhoyne.cloudapp.net/NyxArcana/changelog.html")]
         public string ChangelogURL {
             get {

@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SimpleUpdater.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="LauncherURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://rhoyne.cloudapp.net/NyxArcana</Value>
-    </Setting>
     <Setting Name="ChangelogURL" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://rhoyne.cloudapp.net/NyxArcana/changelog.html</Value>
     </Setting>
