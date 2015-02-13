@@ -207,7 +207,7 @@
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.splitter1);
             this.Name = "LauncherForm";
-            this.Text = "Form1";
+            this.Text = "Game Launcher";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
