@@ -25,7 +25,7 @@ namespace SimpleUpdater.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://rhoyne.cloudapp.net/NyxArcana/changelog.html")]
+        [global::System.Configuration.DefaultSettingValueAttribute("www.example.com/changelog.html")]
         public string ChangelogURL {
             get {
                 return ((string)(this["ChangelogURL"]));
@@ -34,7 +34,7 @@ namespace SimpleUpdater.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://rhoyne.cloudapp.net/NyxArcana/Manifest.txt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("www.example.com/Manifest.txt")]
         public string ManifestURL {
             get {
                 return ((string)(this["ManifestURL"]));
