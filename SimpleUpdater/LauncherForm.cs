@@ -186,6 +186,8 @@ namespace SimpleUpdater
                 string gameFilePath = gameInstallDir + kv.Key.Replace("/", Path.DirectorySeparatorChar.ToString());
                 if (File.Exists(gameFilePath))
                 {
+                    int progress = (int)(((float)curFile / (float)totalFiles) * 100);
+                    backgroundWorker1.ReportProgress(progress, "(" + (curFile) + " / " + totalFiles + ") Checking " + kv.Key);
                     //Check it's md5 hash
                     using (var stream = File.OpenRead(gameFilePath))
                     {
@@ -250,7 +252,10 @@ namespace SimpleUpdater
         private void DownloadFile(int curFile, int totalFiles, KeyValuePair<string, string> kv, LauncherManifest RemoteManifest, string gameFilePath, WebClient webClient)
         {
             int progress = (int)(((float)curFile / (float)totalFiles) * 100);
-            backgroundWorker1.ReportProgress(progress, "Downloading " + kv.Key);
+
+            string status = "(" + (curFile) + " / " + totalFiles + ") Downloading: " + kv.Key;
+
+            backgroundWorker1.ReportProgress(progress, status);
 
             string remoteFile = (RemoteManifest.ProjectRoot + kv.Key.Substring(1));
 
@@ -260,7 +265,7 @@ namespace SimpleUpdater
                 File.Delete(gameFilePath);
             }
 
-            webClient.DownloadFileAsync(new Uri(remoteFile), gameFilePath, kv.Key);
+            webClient.DownloadFileAsync(new Uri(remoteFile), gameFilePath, status);
 
             while (webClient.IsBusy)
             {
@@ -275,10 +280,29 @@ namespace SimpleUpdater
 
         void webClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            string status = "Downloading " + e.UserState as string + "( " + e.BytesReceived + " / " + e.TotalBytesToReceive + " )";
+
+
+            string status = e.UserState as string + " ( " + Size(e.BytesReceived) + " / " + Size(e.TotalBytesToReceive) + " )";
             backgroundWorker1.ReportProgress(e.ProgressPercentage, status);
         }
 
+        private string Size(long bytes)
+        {
+            if(bytes > 1000000000)
+            {
+                return ((float)bytes / 1000000000f).ToString("f") + " GB";
+            }
+
+            if(bytes > 1000000)
+            {
+                return ((float)bytes / 1000000f).ToString("f") + " MB";
+            }
+            if (bytes > 1000)
+            {
+                return ((float)bytes / 1000f).ToString("f") + " KB";
+            }
+            return ((float)bytes).ToString("f") + " B";
+        }
 
 
 
@@ -312,7 +336,10 @@ namespace SimpleUpdater
 
         private void LaunchGame()
         {
-            LauncherManifest LocalManifest = JsonConvert.DeserializeObject<LauncherManifest>(File.ReadAllText(LocalManifestFilename));
+            string gameDirectory = Properties.Settings.Default.GameInstallDirectory;
+            string localManifest = gameDirectory + Path.DirectorySeparatorChar + LocalManifestFilename;
+
+            LauncherManifest LocalManifest = JsonConvert.DeserializeObject<LauncherManifest>(File.ReadAllText(localManifest));
             string gameInstallDir = Properties.Settings.Default.GameInstallDirectory;
 
             ProcessStartInfo psi = new ProcessStartInfo();
