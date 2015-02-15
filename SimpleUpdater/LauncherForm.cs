@@ -37,6 +37,7 @@ namespace SimpleUpdater
         private void SetChangelog()
         {
             changelogBrowser.Navigate(SimpleUpdater.Properties.Settings.Default.ChangelogURL);
+            changelogBrowser.Refresh(WebBrowserRefreshOption.Completely);
         }
 
 
@@ -288,12 +289,12 @@ namespace SimpleUpdater
 
         private string Size(long bytes)
         {
-            if(bytes > 1000000000)
+            if (bytes > 1000000000)
             {
                 return ((float)bytes / 1000000000f).ToString("f") + " GB";
             }
 
-            if(bytes > 1000000)
+            if (bytes > 1000000)
             {
                 return ((float)bytes / 1000000f).ToString("f") + " MB";
             }
